@@ -47,13 +47,12 @@ if (isset($_POST['unban'])){
 <body>
 <div class="main-container">
     <?php include('header.php'); ?>
-
     <div class="main-wrapper">
         <section class="main-articles" style="width: 100%;">
-
             <h1 class = "add-event__header">Люди</h1>
-
-
+            <form action="pdf.php" method="post">
+                <input type="submit" name="users_print" value="Распечатать">
+            </form>
             <?php
 
             $query = "SELECT * FROM users ";
@@ -87,16 +86,12 @@ if (isset($_POST['unban'])){
                 echo "<button type='submit' name='ban'>Забанить</button>";
                 echo "<button type='submit' name='unban'>Разбанить</button>";
                 echo "</form>";
-
             }
             ?>
-
         </section>
 
     </div>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 

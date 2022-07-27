@@ -158,16 +158,14 @@
                     echo "Администратор";
                 }
                 echo "</strong></div>";
-                echo "<div>".$comment['pubdate']."</div>";
+                echo "<div class='message'>".$comment['pubdate']."</div>";
                 echo "<p class=\"comment_p\">".$comment['text']."</p>";
                 echo "<hr> </article>";
             }
 
         ?>
     </section>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 

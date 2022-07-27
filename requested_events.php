@@ -30,6 +30,13 @@
                  echo "<a href='http://placenevents/event_check.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                 if($article['adds']){
                     echo "<p style = 'color:red;'><strong>РЕКЛАМА</strong></p>";
+                    $query1= "SELECT * FROM transactions WHERE event_id = '".$article['event_id']."'";
+                    $result1 = mysqli_query($con, $query1);
+                    if (mysqli_fetch_assoc($result1)){
+                        echo "<p style = 'color:green;'><strong>Оплачено</strong></p>";
+                    }else{
+                        echo "<p style = 'color:red;'><strong>Не оплачено</strong></p>";
+                    }
                 }
                  echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                  echo "<p>".substr($article['description'],0,200)."...</p>";
@@ -41,9 +48,7 @@
         </section>
 
     </div>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 

@@ -38,7 +38,14 @@
             <h1 class = "add-event__header">
                 <?php
                 if($article['adds']){
-                    echo "<p style = 'color:red;'><strong>РЕКЛАМА id = $article[event_id] </strong></p>";
+
+                    $query1= "SELECT * FROM transactions WHERE event_id = '".$article['event_id']."'";
+                    $result1 = mysqli_query($con, $query1);
+                    if (mysqli_fetch_assoc($result1)){
+                        echo "<p><strong>Реклама: </strong><strong style = 'color:green;'>Оплачено</strong></p>";
+                    }else{
+                        echo "<p><strong>Реклама: </strong><strong style = 'color:red;'>Не оплачено</strong></p>";
+                    }
 
                 }
                 if ($article['event_type']==1){
@@ -90,9 +97,7 @@
         </section>
 
     </div>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 

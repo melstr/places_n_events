@@ -10,7 +10,9 @@
 <html>
 
 <head>
+
   <title>Главная</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,500,700&display=swap&subset=cyrillic"
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
@@ -30,11 +32,11 @@
               $query ="SELECT * FROM events WHERE adds = '1' ORDER BY pubdate desc";
               $request = mysqli_query($con, $query);
 
-              while($article = mysqli_fetch_assoc($request)){
+             while($article = mysqli_fetch_assoc($request)){
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-
+                  echo "<p><em>Реклама</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -45,7 +47,7 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: ".$article['coun']."</strong></p>";
+                  echo "<p><em>Популярность: ".$article['coun']." чел.</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -54,6 +56,7 @@
                 WHERE events.event_id NOT IN (SELECT event_id FROM wanna_go) 
                 AND events.adds != 1  
                 AND events.event_id = category_event.event_id 
+                AND events.status='approved'
                 AND category_event.category_id = user_category.category_id AND user_category.user_id = $_SESSION[user_id] ORDER BY events.pubdate DESC ";
 
               $request = mysqli_query($con, $query);
@@ -62,7 +65,7 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: 0 </strong></p>";
+                  echo "<p><em>Популярность: 0 чел.</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -78,7 +81,7 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: ".$article['coun']."</strong></p>";
+                  echo "<p><em>Популярность: ".$article['coun']." чел.</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -87,6 +90,7 @@
                 WHERE events.event_id NOT IN (SELECT event_id FROM wanna_go) 
                 AND events.adds != '1' 
                 AND events.event_id = category_event.event_id 
+                  AND events.status='approved'
                 AND category_event.category_id NOT IN (SELECT category_id FROM user_category WHERE user_id = '$_SESSION[user_id]') ORDER BY events.pubdate DESC ";
 
               $request = mysqli_query($con, $query);
@@ -95,18 +99,18 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: 0 </strong></p>";
+                  echo "<p><em>Популярность: 0 чел.</em></p>";
                   echo "</div></article></a>";
               }
           }else{
-              $query ="SELECT * FROM events WHERE adds = '1' ORDER BY pubdate desc";
+              $query ="SELECT * FROM events WHERE adds = '1' AND events.status='approved' ORDER BY pubdate";
               $request = mysqli_query($con, $query);
 
               while($article = mysqli_fetch_assoc($request)){
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-
+                  echo "<p><em>Реклама</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -117,7 +121,7 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: ".$article['coun']."</strong></p>";
+                  echo "<p><em>Популярность: ".$article['coun']." чел.</em></p>";
                   echo "</div></article></a>";
               }
 
@@ -125,6 +129,7 @@
                 FROM events,  category_event, user_category 
                 WHERE events.event_id NOT IN (SELECT event_id FROM wanna_go) 
                 AND events.adds != '1' 
+                AND events.status='approved'
                 ORDER BY events.pubdate DESC ";
 
               $request = mysqli_query($con, $query);
@@ -133,7 +138,7 @@
                   echo "<a href='http://placenevents/event_show.php/?id=".$article['event_id']. "' class='article__link'> <article class='article'> <div class='article__text'>";
                   echo "<h2 class=\"article__name\">".$article['title']."</h2>";
                   echo "<p>".substr($article['description'],0,200)."...</p>";
-                  echo "<p><strong>pop: 0 </strong></p>";
+                  echo "<p><em>Популярность: 0 чел.</em></p>";
                   echo "</div></article></a>";
               }
           }
@@ -144,9 +149,7 @@
       </section>
 
     </div>
-    <footer class="main-footer">
-      <span>Обратная связь</span>
-    </footer>
+      <?php include('footer.php'); ?>
   </div>
 </body>
 

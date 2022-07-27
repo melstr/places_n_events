@@ -75,9 +75,7 @@ if($_GET['destroy']==true){
         </section>
 
     </div>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 

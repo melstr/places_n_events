@@ -84,9 +84,7 @@
                 Вы увидите id вашего события, затем перешлите 100р. на карту Сбербанка с номером 4276 3522 3342 1232 с комментарием "Реклама id = ваше id"</p>
         </aside>
     </div>
-    <footer class="main-footer">
-        <span>Обратная связь</span>
-    </footer>
+    <?php include('footer.php'); ?>
 </div>
 </body>
 </html>

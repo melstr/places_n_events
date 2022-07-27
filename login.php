@@ -21,6 +21,27 @@ if($_GET['tried']=='true')
              $_SESSION['first_name']=$user['first_name'];
              $_SESSION['user_type']=$user['user_type'];
              $_SESSION['user_status']=$user['status'];
+             $_SESSION['second_name']=$user['second_name'];
+             $_SESSION['middle_name']=$user['middle_name'];
+
+
+             switch($user['user_type']){
+                 case 1:
+                     $_SESSION['user_type_name'] = 'Горожанин';
+                     break;
+                 case 2:
+                     $_SESSION['user_type_name'] = 'Организатор';
+                     break;
+                 case 3:
+                     $_SESSION['user_type_name'] = 'Модератор';
+                     break;
+                 case 4:
+                     $_SESSION['user_type_name'] = 'Администратор';
+                     break;
+                 default:
+                     break;
+
+             }
              header("Location: http://placenevents/index.php");
          }
          else{
